@@ -1,0 +1,6 @@
+/.vscode
+/_build
+/_dist
+/_rpm
+/_sysroot
+/make.conf
