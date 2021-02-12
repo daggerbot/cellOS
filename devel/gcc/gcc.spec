@@ -11,4 +11,4 @@ Fortran, Ada, Go, and D, as well as libraries for these languages
 (libstdc++,...). GCC was originally written as the compiler for the GNU
 operating system. The GNU system was developed to be 100% free software, free
 in the sense that it respects the user's freedom. This package provides the
-front ends for C and C++.
+front end for C.
