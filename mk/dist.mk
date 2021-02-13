@@ -84,6 +84,7 @@ ifneq ($(wildcard build.sh),)
 		ARCH='${ARCH}' \
 		CURDIR='$(abspath ${CURDIR})' \
 		DISTDIR='$(abspath ${DISTDIR})' \
+		LIB='${LIB}' \
 		PKG_VERSION='${PKG_VERSION}' \
 		SRCDIR='$(abspath ${SRCDIR})' \
 		${BUILD_SH_ENV} \

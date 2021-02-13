@@ -6,6 +6,7 @@ set -e
 
 case $1 in
     stage)
+        # Install dash as /bin/sh
         mv dash/bin/dash dash/bin/sh
         mv dash/usr/share/man/man1/dash.1 dash/usr/share/man/man1/sh.1
         ;;

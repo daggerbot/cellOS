@@ -25,6 +25,7 @@ $(foreach pkg,${PKG_NAMES},$(eval ${pkg}.BUILDARCH := $$(if $$(filter any,$${${p
 # Check subpackage variables
 $(foreach pkg,${PKG_NAMES},$(if $(filter 1,$(words ${${pkg}.PKG_VERSION})),,$(error Missing or invalid ${pkg}.PKG_VERSION)))
 $(foreach pkg,${PKG_NAMES},$(if $(filter 1,$(words ${${pkg}.PKG_RELEASE})),,$(error Missing or invalid ${pkg}.PKG_RELEASE)))
+$(foreach pkg,${PKG_NAMES},$(if $(filter %.cellos,${${pkg}.PKG_RELEASE}),,$(error ${pkg}.PKG_RELEASE must end with .cellos)))
 $(foreach pkg,${PKG_NAMES},$(if $(filter 0,$(words ${${pkg}.PKG_ARCH})),$(error Missing ${pkg}.PKG_ARCH)))
 $(foreach pkg,${PKG_NAMES},$(if $(filter 0,$(words ${${pkg}.BUILDARCH})),$(error ${pkg} does not support ${ARCH})))
 $(foreach pkg,${PKG_NAMES},$(if $(filter 1,$(words ${${pkg}.BUILDARCH})),,$(error Invalid ${pkg}.PKG_ARCH)))
