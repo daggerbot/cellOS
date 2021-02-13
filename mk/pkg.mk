@@ -57,8 +57,10 @@ ${BUILD_STAMP}: ${PREPARE_STAMP}
 	${MAKE} --no-print-directory $(if ${CONFIG},CONFIG='${CONFIG}') build-hook
 ifneq ($(wildcard build.sh),)
 	cd ${OBJDIR} && env \
+		${BUILD_ENV} \
 		ARCH='${ARCH}' \
 		PKG_VERSION='${PKG_VERSION}' \
+		SRCDIR='$(abspath ${SRCDIR})' \
 		${BUILD_SH_ENV} \
 		${SH} '$(abspath build.sh)' build
 endif

@@ -4,6 +4,7 @@
 
 PKG_NAMES = \
 	ncurses \
+	ncurses-c++-devel \
 	ncurses-c++-libs \
 	ncurses-devel \
 	ncurses-libs \

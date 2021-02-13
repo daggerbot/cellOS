@@ -16,10 +16,6 @@ case $1 in
         mkdir -p ncurses-c++-libs/usr/$LIB
         mv ncurses-libs/usr/$LIB/*++.so.* ncurses-c++-libs/usr/$LIB/.
 
-        # Move out ncurses-term files
-        mkdir -p ncurses-term/usr/share
-        mv ncurses/usr/share/tabset ncurses/usr/share/terminfo ncurses-term/usr/share/.
-
         # Move out ncurses-devel files
         mkdir -p ncurses-devel/usr/bin \
                  ncurses-devel/usr/$LIB \
@@ -28,6 +24,24 @@ case $1 in
         mv ncurses/usr/include ncurses-devel/usr/.
         mv ncurses/usr/$LIB/*.so ncurses/usr/$LIB/pkgconfig ncurses-devel/usr/$LIB/.
         mv ncurses/usr/share/man/man3 ncurses-devel/usr/share/man/.
+
+        # Move out ncurses-c++-devel files
+        mkdir -p ncurses-c++-devel/usr/include \
+                 ncurses-c++-devel/usr/$LIB/pkgconfig
+
+        for file in ncurses-devel/usr/include/curs*.h; do
+            case $file in
+                */curses.h) ;;
+                *) mv $file ncurses-c++-devel/usr/include/. ;;
+            esac
+        done
+
+        mv ncurses-devel/usr/$LIB/libncurses++.so ncurses-c++-devel/usr/$LIB/.
+        mv ncurses-devel/usr/$LIB/pkgconfig/ncurses++.pc ncurses-c++-devel/usr/$LIB/pkgconfig/.
+
+        # Move out ncurses-term files
+        mkdir -p ncurses-term/usr/share
+        mv ncurses/usr/share/tabset ncurses/usr/share/terminfo ncurses-term/usr/share/.
 
         # Install libtinfo to /lib (needed by bash)
         mkdir -p ncurses-libs/$LIB

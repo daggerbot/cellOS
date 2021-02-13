@@ -3,8 +3,7 @@ Summary: Terminal manipulation library - Development files
 URL: https://invisible-island.net/ncurses/announce.html
 
 Autoreq: 0
-Requires: glibc-devel
-Requires: ncurses-c++-libs(%{_deparch}) = %{version}-%{release}
+Requires: glibc-devel(%{_deparch})
 Requires: ncurses-libs(%{_deparch}) = %{version}-%{release}
 
 %description

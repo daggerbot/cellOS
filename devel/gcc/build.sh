@@ -47,6 +47,19 @@ case $1 in
         mkdir -p gcc/lib
         ln -s ../usr/bin/cpp gcc/lib/cpp
 
+        # Move out gcc-libs files
+        mkdir -p gcc-libs/usr/$LIB
+        mv gcc/usr/$LIB/*.so.* gcc-libs/usr/$LIB/.
+
+        # Move out libstdc++ files
+        mkdir -p libstdc++/usr/$LIB
+        mv gcc-libs/usr/$LIB/libstdc++.so.* libstdc++/usr/$LIB/.
+
+        # Move out libstdc++-devel files
+        mkdir -p libstdc++-devel/usr/include libstdc++-devel/usr/$LIB
+        mv gcc/usr/include/c++ libstdc++-devel/usr/include/.
+        mv gcc/usr/$LIB/*++* libstdc++/usr/$LIB/*.py libstdc++-devel/usr/$LIB/.
+
         # Move out gcc-c++ files
         mkdir -p gcc-c++/usr/bin \
                  gcc-c++/usr/include \
@@ -54,17 +67,8 @@ case $1 in
                  gcc-c++/usr/share/gcc-$PKG_VERSION/python \
                  gcc-c++/usr/share/man/man1
         mv gcc/usr/bin/*++ gcc-c++/usr/bin/.
-        mv gcc/usr/include/c++ gcc-c++/usr/include/.
-        mv gcc/usr/$LIB/*++*.a \
-           gcc/usr/$LIB/*++*.py \
-           gcc/usr/$LIB/libstdc++.so \
-           gcc-c++/usr/$LIB/.
         mv gcc/usr/share/gcc-$PKG_VERSION/python/libstdcxx gcc-c++/usr/share/gcc-$PKG_VERSION/python/.
         mv gcc/usr/share/man/man1/*++.1 gcc-c++/usr/share/man/man1/.
-
-        # Move out gcc-libs files
-        mkdir -p gcc-libs/usr/$LIB
-        mv gcc/usr/$LIB/*.so.* gcc-libs/usr/$LIB/.
 
         # Move out gcc-plugin-devel files
         mkdir -p gcc-plugin-devel/usr/$LIB/gcc/$TARGET/$PKG_VERSION

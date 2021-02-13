@@ -3,4 +3,4 @@ Summary: GNU Compiler Collection - Runtime libraries
 URL: http://www.gnu.org/software/gcc/
 
 %description
-This package contains the runtime libraries required by programs built with GCC.
+This package contains the runtime libraries for programs built with GCC.

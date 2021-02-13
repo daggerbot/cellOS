@@ -2,7 +2,13 @@
 # This file is subject to the terms of the ISC license.
 # See LICENSE.txt in the project directory for more information.
 
-PKG_NAMES = gcc gcc-c++ gcc-libs gcc-plugin-devel
+PKG_NAMES = \
+	gcc \
+	gcc-c++ \
+	gcc-libs \
+	gcc-plugin-devel \
+	libstdc++ \
+	libstdc++-devel
 PKG_VERSION = 10.2.0
 PKG_RELEASE = 1.cellos
 PKG_ARCH = any
