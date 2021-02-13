@@ -19,8 +19,11 @@ printf "%%files\n"
 for file in $(find . | fgrep / | sed 's@^\./@@' | sort); do
     if [ -d $file ] && [ ! -L $file ]; then
         printf "%%dir "
-    elif printf "%s\n" "$file" | grep '^/etc/' > /dev/null && [ -f $file ]; then
-        printf "%%config "
+    else
+        case $file in
+            etc/*) printf "%%config " ;;
+            usr/share/doc/*) printf "%%doc " ;;
+        esac
     fi
 
     printf "/%s\n" "$file"
