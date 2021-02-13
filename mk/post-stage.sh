@@ -29,17 +29,17 @@ for dir in usr/lib*; do
     fi
 done
 
-if [ ! -n "$KeepEmptyDirs" ]; then
-    for dir in $(find . -type d | fgrep / | tac); do
-        rmdir --ignore-fail-on-non-empty $dir
-    done
-fi
-
 if [ ! -n "$KeepStaticLibs" ]; then
     for dir in usr/lib*; do
         if [ -d $dir ]; then
             find $dir -type f -name '*.a' -delete
         fi
+    done
+fi
+
+if [ ! -n "$KeepEmptyDirs" ]; then
+    for dir in $(find . -type d | fgrep / | sort | tac); do
+        rmdir --ignore-fail-on-non-empty $dir
     done
 fi
 
