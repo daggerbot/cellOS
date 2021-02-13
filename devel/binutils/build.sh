@@ -6,8 +6,41 @@ set -e
 
 case $1 in
     stage)
+        # Consolidate redundant program names
+        for file in binutils/usr/bin/*; do
+            name=$(basename $file)
+            case $name in
+                *-$PKG_VERSION)
+                    rm $file
+                    ;;
+                $TARGET-$TARGET-*)
+                    dest=binutils/usr/bin/$(printf "%s\n" "$name" | sed "s/^$TARGET-$TARGET-//")
+                    rm -f $dest
+                    mv $file $dest
+                    ;;
+                $TARGET-*)
+                    dest=binutils/usr/bin/$(printf "%s\n" "$name" | sed "s/^$TARGET-//")
+                    rm -f $dest
+                    mv $file $dest
+                    ;;
+            esac
+        done
+
+        for file in binutils/usr/share/man/man1/*; do
+            name=$(basename $file)
+            case $name in
+                $TARGET-*)
+                    dest=binutils/usr/share/man/man1/$(printf "%s\n" "$name" | sed "s/^$TARGET-//")
+                    rm -f $dest
+                    mv $file $dest
+                    ;;
+            esac
+        done
+
         # Use symlinks instead of hard links
         ln -sf ld.bfd binutils/usr/bin/ld
+        mv binutils/usr/share/man/man1/ld.1 binutils/usr/share/man/man1/ld.bfd.1
+        ln -sf ld.bfd.1 binutils/usr/share/man/man1/ld.1
 
         # Don't install man pages for missing programs
         for man in binutils/usr/share/man/man1/*; do
