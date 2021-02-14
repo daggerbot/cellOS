@@ -30,6 +30,6 @@ CONFIGURE_FLAGS = \
 	--disable-bootstrap \
 	--disable-multilib \
 	--with-system-zlib \
-	$(if S{SYSROOT},--with-sysroot='${SYSROOT}')
+	$(if ${SYSROOT},--with-build-sysroot='${SYSROOT}')
 
 include ../../mk/pkg.mk
