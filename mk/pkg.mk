@@ -59,8 +59,10 @@ ifneq ($(wildcard build.sh),)
 	cd ${OBJDIR} && env \
 		${BUILD_ENV} \
 		ARCH='${ARCH}' \
+		LIB='${LIB}' \
 		PKG_VERSION='${PKG_VERSION}' \
 		SRCDIR='$(abspath ${SRCDIR})' \
+		SYSROOT='${SYSROOT}' \
 		${BUILD_SH_ENV} \
 		${SH} '$(abspath build.sh)' build
 endif
@@ -81,6 +83,7 @@ ${STAGE_STAMP}: ${BUILD_STAMP}
 	${MAKE} --no-print-directory $(if ${CONFIG},CONFIG='${CONFIG}') stage-hook
 ifneq ($(wildcard build.sh),)
 	cd ${STAGEDIR} && env \
+		${BUILD_ENV} \
 		ARCH='${ARCH}' \
 		CURDIR='$(abspath ${CURDIR})' \
 		LIB='${LIB}' \
@@ -88,6 +91,7 @@ ifneq ($(wildcard build.sh),)
 		PKG_VERSION='${PKG_VERSION}' \
 		SRCDIR='$(abspath ${SRCDIR})' \
 		STAGEDIR='$(abspath ${STAGEDIR})' \
+		SYSROOT='${SYSROOT}' \
 		TARGET='${TARGET}' \
 		${BUILD_SH_ENV} \
 		${SH} '$(abspath build.sh)' stage
